@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full-Stack & AI Developer | Venkata Sathvik Chittipaka</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #111111;
+            --text-white: #ffffff;
+            --text-zinc-300: #d4d4d8;
+            --text-zinc-400: #a1a1aa;
+            --border-zinc-800: #27272a;
+            --bg-zinc-900: #18181b;
+            --bg-zinc-900-50: rgba(24, 24, 27, 0.5);
+            --border-zinc-600-50: rgba(82, 82, 91, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-white);
+            font-family: 'Geist', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Container */
+        .container {
+            max-width: 672px;
+            margin: 0 auto;
+            padding: 0 24px;
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 1.875rem;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+        }
+
+        .text-xs {
+            font-size: 0.75rem;
+        }
+
+        .text-base {
+            font-size: 1rem;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .font-mono {
+            font-family: monospace;
+        }
+
+        .text-white {
+            color: var(--text-white);
+        }
+
+        .text-zinc-400 {
+            color: var(--text-zinc-400);
+        }
+
+        .text-zinc-300 {
+            color: var(--text-zinc-300);
+        }
+
+        .leading-relaxed {
+            line-height: 1.625;
+        }
+
+        .mt-2 {
+            margin-top: 8px;
+        }
+
+        .mt-6 {
+            margin-top: 24px;
+        }
+
+        .mt-8 {
+            margin-top: 32px;
+        }
+
+        .mt-12 {
+            margin-top: 48px;
+        }
+
+        .mb-6 {
+            margin-bottom: 24px;
+        }
+
+        .mb-8 {
+            margin-bottom: 32px;
+        }
+
+        .mb-12 {
+            margin-bottom: 48px;
+        }
+
+        .gap-2 {
+            gap: 8px;
+        }
+
+        .gap-4 {
+            gap: 16px;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-row {
+            flex-direction: row;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .flex-shrink-0 {
+            flex-shrink: 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Wavy Links */
+        .wavy-link {
+            position: relative;
+            color: var(--text-zinc-300);
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .wavy-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            /* 4px dash pattern */
+            background-image: linear-gradient(to right, var(--text-zinc-400) 50%, transparent 50%);
+            background-size: 8px 1px;
+            background-repeat: repeat-x;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .wavy-link:hover::after {
+            opacity: 1;
+            animation: moveBorder 0.5s linear infinite;
+        }
+
+        @keyframes moveBorder {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: 8px 0;
+            }
+        }
+
+        /* Hero */
+        .hero {
+            margin-bottom: 80px;
+        }
+
+        .avatar-container {
+            width: 96px;
+            height: 96px;
+            margin-bottom: 32px;
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Experience */
+        .experience-entry {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 64px;
+        }
+
+        .company-logo {
+            width: 48px;
+            height: 48px;
+            background-color: var(--bg-zinc-900);
+            border: 1px solid var(--border-zinc-800);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .company-logo-placeholder {
+            width: 100%;
+            height: 100%;
+            background-color: var(--border-zinc-800);
+        }
+
+        .exp-details {
+            flex-grow: 1;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+
+        /* Projects */
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .project-card {
+            display: block;
+            transition: transform 200ms ease-out;
+        }
+
+        .project-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .project-title {
+            margin-bottom: 8px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        /* What I Build */
+        .support-list {
+            list-style: none;
+            margin-top: 16px;
+            margin-bottom: 24px;
+        }
+
+        .support-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 8px;
+            color: var(--text-zinc-300);
+            font-size: 0.875rem;
+        }
+
+        .custom-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #71717a;
+            border-radius: 50%;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        /* Activities Carousel */
+        .activities-wrapper {
+            width: 100%;
+            margin-top: 80px;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .carousel-container {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 24px;
+            width: max-content;
+            /* 1032px distance at 30px/s (0.5px/frame at 60fps) = 34.4s */
+            animation: scroll 34.4s linear infinite;
+        }
+
+        .carousel-group {
+            display: flex;
+            gap: 24px;
+        }
+
+        .carousel-card {
+            width: 320px;
+            flex-shrink: 0;
+            padding: 24px;
+            border: 1px solid var(--border-zinc-800);
+            background-color: var(--bg-zinc-900-50);
+            border-radius: 12px;
+            transition: border-color 0.2s ease;
+            position: relative;
+        }
+
+        .carousel-card:hover {
+            border-color: var(--border-zinc-600-50);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid;
+            display: inline-block;
+        }
+
+        .badge.community {
+            background-color: rgba(20, 83, 45, 0.3);
+            color: #86efac;
+            border-color: rgba(22, 101, 52, 0.5);
+        }
+
+        .badge.competition {
+            background-color: rgba(120, 53, 15, 0.3);
+            color: #fcd34d;
+            border-color: rgba(146, 64, 14, 0.5);
+        }
+
+        .badge.certification {
+            background-color: rgba(88, 28, 135, 0.3);
+            color: #d8b4fe;
+            border-color: rgba(107, 33, 168, 0.5);
+        }
+
+        .fade-left,
+        .fade-right {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 80px;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .fade-left {
+            left: 0;
+            background: linear-gradient(to right, #111111, transparent);
+        }
+
+        .fade-right {
+            right: 0;
+            background: linear-gradient(to left, #111111, transparent);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(calc(-50% - 12px));
+            }
+        }
+
+        /* Footer */
+        footer {
+            max-width: 672px;
+            margin: 0 auto;
+            padding: 0 24px;
+            padding-bottom: 80px;
+        }
+
+        .footer-links a {
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-white);
+        }
+
+        /* Bottom Scroll Gradient */
+        .bottom-gradient {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to top, #111111, transparent);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 50;
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 700ms ease-out, transform 700ms ease-out;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="avatar-container animate-on-scroll" data-delay="0">
+                <img src="img/avatar-default.png" alt="Venkata Sathvik Chittipaka" id="avatar">
+            </div>
+            <h1 class="animate-on-scroll" data-delay="1">Venkata Sathvik Chittipaka</h1>
+            <p class="text-sm text-zinc-400 mt-2 animate-on-scroll" data-delay="2">Full-Stack & AI Developer · CS
+                Undergrad @ KMEC, Hyderabad</p>
+
+            <p class="text-sm text-zinc-300 leading-relaxed mt-8 animate-on-scroll" data-delay="3">
+                I am a Computer Science undergrad building at the intersection of full-stack engineering and applied AI.
+                What
+                starts as 'this should exist' ends as something deployed with a working backend, a real user flow, and
+                lessons I didn't expect.
+            </p>
+            <p class="text-sm text-zinc-300 leading-relaxed mt-8 animate-on-scroll" data-delay="4">
+                I build and train deep learning architectures, work with LLMs, and have research work in preparation for
+                publication. Co-founder of INKCREW, a D2C merchandise brand.
+            </p>
+            <p class="text-sm text-zinc-300 leading-relaxed mt-8 animate-on-scroll" data-delay="5">
+                you can find me at <a href="www.linkedin.com/in/venkata-sathvik-chittipaka-b8732630a"
+                    class="wavy-link">LinkedIn</a> and <a href="https://github.com/sathvikchitti"
+                    class="wavy-link">GitHub</a>
+            </p>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="mb-12">
+            <h2 class="mb-8 animate-on-scroll" data-delay="0">latest experience</h2>
+            <div class="experience-entry animate-on-scroll" data-delay="1">
+                <div class="company-logo">
+                    <div class="company-logo-placeholder"><img src="img/inkcrew_logo.jpg" alt="INKCREW"></div>
+                </div>
+                <div class="exp-details">
+                    <div class="exp-header">
+                        <h3 class="text-base font-medium">Co-Founder & Product Designer</h3>
+                        <span class="text-xs text-zinc-400 font-mono">2025 — Present</span>
+                    </div>
+                    <div class="text-sm font-medium mb-2">INKCREW</div>
+                    <p class="text-sm text-zinc-300 leading-relaxed">
+                        Designed and launched a D2C merchandise brand. Own product design, brand identity, and web
+                        storefront. Gained firsthand experience in the gap between building a product and building a
+                        business.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="mb-12">
+            <h2 class="mb-8 animate-on-scroll" data-delay="0">selected projects</h2>
+            <div class="projects-list">
+                <a href="https://github.com/sathvikchitti/ManoDhwani" class="project-card animate-on-scroll"
+                    data-delay="1">
+                    <h3 class="text-sm font-medium project-title text-white">ManoDhwani</h3>
+                    <p class="text-sm text-white leading-relaxed">
+                        Multimodal depression detection system using a custom GatedFusionNet architecture fusing audio
+                        and linguistic signals via emotion2vec_plus_large, mental-RoBERTa, and TemporalBiLSTM. Deployed
+                        on HuggingFace Spaces. Research paper in preparation for publication.
+                    </p>
+                    <div class="project-tags">
+                        <span class="text-xs text-zinc-400">Python</span>
+                        <span class="text-xs text-zinc-400">PyTorch</span>
+                        <span class="text-xs text-zinc-400">Flask</span>
+                        <span class="text-xs text-zinc-400">HuggingFace</span>
+                        <span class="text-xs text-zinc-400">Deep Learning</span>
+                        <span class="text-xs text-zinc-400">NLP</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/sathvikchitti/MediMap" class="project-card animate-on-scroll"
+                    data-delay="2">
+                    <h3 class="text-sm font-medium project-title text-white">MediMap</h3>
+                    <p class="text-sm text-white leading-relaxed">
+                        Full-stack health report management platform with OCR-based document extraction and Groq/Llama
+                        AI inference. Built on Next.js 14 and Supabase with Recharts. Designed end-to-end AI pipeline to
+                        make personal health data actionable, not just stored.
+                    </p>
+                    <div class="project-tags">
+                        <span class="text-xs text-zinc-400">Next.js 14</span>
+                        <span class="text-xs text-zinc-400">TypeScript</span>
+                        <span class="text-xs text-zinc-400">Supabase</span>
+                        <span class="text-xs text-zinc-400">Groq</span>
+                        <span class="text-xs text-zinc-400">Llama</span>
+                        <span class="text-xs text-zinc-400">OCR</span>
+                        <span class="text-xs text-zinc-400">Recharts</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/sathvikchitti/ChainBIll" class="project-card animate-on-scroll"
+                    data-delay="3">
+                    <h3 class="text-sm font-medium project-title text-white">ChainBill</h3>
+                    <p class="text-sm text-white leading-relaxed">
+                        Blockchain invoice discounting platform for Indian MSMEs on Polygon with Solidity smart
+                        contracts and three distinct role dashboards for Supplier, Buyer, and Investor. Addresses the
+                        60–90 day payment gap that stalls small business working capital.
+                    </p>
+                    <div class="project-tags">
+                        <span class="text-xs text-zinc-400">Next.js</span>
+                        <span class="text-xs text-zinc-400">TypeScript</span>
+                        <span class="text-xs text-zinc-400">Solidity</span>
+                        <span class="text-xs text-zinc-400">Polygon</span>
+                        <span class="text-xs text-zinc-400">ethers.js</span>
+                        <span class="text-xs text-zinc-400">NextAuth.js</span>
+                        <span class="text-xs text-zinc-400">Vercel</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- What I Build Section -->
+        <section id="support" class="mb-12">
+            <h2 class="mb-6 animate-on-scroll" data-delay="0">what I build</h2>
+            <p class="text-sm text-zinc-300 animate-on-scroll" data-delay="1">
+                I build end-to-end systems — UI, backend, database, AI/ML integration, and smart contracts — rather than
+                working in isolated layers.
+            </p>
+            <ul class="support-list animate-on-scroll" data-delay="2">
+                <li>
+                    <div class="custom-dot"></div>Full-stack web applications (Next.js, TypeScript, Supabase)
+                </li>
+                <li>
+                    <div class="custom-dot"></div>AI/ML systems and deep learning model development (PyTorch,
+                    HuggingFace)
+                </li>
+                <li>
+                    <div class="custom-dot"></div>LLM integration and inference pipelines (Groq, Llama)
+                </li>
+                <li>
+                    <div class="custom-dot"></div>Blockchain and smart contract development (Solidity, Polygon)
+                </li>
+            </ul>
+            <p class="text-sm text-zinc-300 animate-on-scroll" data-delay="3">
+                Open to internships, hackathons, and research collaborations in applied AI, full-stack engineering, or
+                blockchain.
+            </p>
+        </section>
+    </div>
+
+    <!-- Activities Section -->
+    <section class="activities-wrapper">
+        <div class="container" style="padding-top:0; padding-bottom:0;">
+            <h2 class="text-center mb-12 animate-on-scroll activities-title" data-delay="0">activities & achievements
+            </h2>
+        </div>
+        <div class="carousel-container">
+            <div class="fade-left"></div>
+            <div class="carousel-track" id="carouselTrack">
+
+                <div class="carousel-group">
+                    <div class="carousel-card">
+                        <div class="card-header">
+                            <span class="badge community">community</span>
+                            <span class="text-xs text-zinc-400 font-mono">2025 — Present</span>
+                        </div>
+                        <h3 class="text-base font-semibold text-white mb-1">ManoDhwani Research Paper</h3>
+                        <div class="text-sm text-zinc-300 font-medium mb-3">Group Research</div>
+                        <p class="text-sm text-zinc-400 leading-relaxed">Preparing a research paper on multimodal
+                            depression detection using the GatedFusionNet architecture. Work spans model design,
+                            training, and evaluation across audio and linguistic modalities.</p>
+                    </div>
+
+                    <div class="carousel-card">
+                        <div class="card-header">
+                            <span class="badge competition">competition</span>
+                            <span class="text-xs text-zinc-400 font-mono">2025</span>
+                        </div>
+                        <h3 class="text-base font-semibold text-white mb-1">Winnova Hackathon</h3>
+                        <div class="text-sm text-zinc-300 font-medium mb-3">Winnova</div>
+                        <p class="text-sm text-zinc-400 leading-relaxed">Built MediMap — a full-stack AI-powered health
+                            report management platform — from scratch during the hackathon. Covered UI, backend,
+                            database, and AI inference pipeline end-to-end.</p>
+                    </div>
+
+                    <div class="carousel-card">
+                        <div class="card-header">
+                            <span class="badge community">community</span>
+                            <span class="text-xs text-zinc-400 font-mono">2025 — Present</span>
+                        </div>
+                        <h3 class="text-base font-semibold text-white mb-1">Co-Founded INKCREW</h3>
+                        <div class="text-sm text-zinc-300 font-medium mb-3">INKCREW</div>
+                        <p class="text-sm text-zinc-400 leading-relaxed">Co-founded a D2C merchandise brand alongside
+                            undergraduate studies. Responsible for product design, brand identity, and the web
+                            storefront.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-group">
+                    <div class="carousel-card">
+                        <div class="card-header">
+                            <span class="badge community">community</span>
+                            <span class="text-xs text-zinc-400 font-mono">2025 — Present</span>
+                        </div>
+                        <h3 class="text-base font-semibold text-white mb-1">ManoDhwani Research Paper</h3>
+                        <div class="text-sm text-zinc-300 font-medium mb-3">Group Research</div>
+                        <p class="text-sm text-zinc-400 leading-relaxed">Preparing a research paper on multimodal
+                            depression detection using the GatedFusionNet architecture. Work spans model design,
+                            training, and evaluation across audio and linguistic modalities.</p>
+                    </div>
+
+                    <div class="carousel-card">
+                        <div class="card-header">
+                            <span class="badge competition">hackathon</span>
+                            <span class="text-xs text-zinc-400 font-mono">2025</span>
+                        </div>
+                        <h3 class="text-base font-semibold text-white mb-1">Winnova Hackathon</h3>
+                        <div class="text-sm text-zinc-300 font-medium mb-3">Winnova</div>
+                        <p class="text-sm text-zinc-400 leading-relaxed">Built MediMap — a full-stack AI-powered health
+                            report management platform — from scratch during the hackathon. Covered UI, backend,
+                            database, and AI inference pipeline end-to-end.</p>
+                    </div>
+
+                    <div class="carousel-card">
+                        <div class="card-header">
+                            <span class="badge community">community</span>
+                            <span class="text-xs text-zinc-400 font-mono">2025 — Present</span>
+                        </div>
+                        <h3 class="text-base font-semibold text-white mb-1">Co-Founded INKCREW</h3>
+                        <div class="text-sm text-zinc-300 font-medium mb-3">INKCREW</div>
+                        <p class="text-sm text-zinc-400 leading-relaxed">Co-founded a D2C merchandise brand alongside
+                            undergraduate studies. Responsible for product design, brand identity, and the web
+                            storefront.</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="fade-right"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="animate-on-scroll" data-delay="0">
+            <h2 class="mb-6">let us build together!</h2>
+            <div class="footer-links text-sm text-zinc-400">
+                <a href="mailto:vsathvikchitti09@gmail.com">Email</a> ·
+                <a href="www.linkedin.com/in/venkata-sathvik-chittipaka-b8732630a">LinkedIn</a> ·
+                <a href="https://github.com/sathvikchitti">GitHub</a>
+            </div>
+            <p class="text-xs text-zinc-400 mt-12">© 2026 · Venkata Sathvik Chittipaka</p>
+        </div>
+    </footer>
+
+    <div class="bottom-gradient" id="bottomGradient"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = entry.target.getAttribute('data-delay') || 0;
+                        const isActivitiesTitle = entry.target.classList.contains('activities-title');
+
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, isActivitiesTitle ? 300 : delay * 150);
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            animateElements.forEach(el => observer.observe(el));
+
+            // Hover logic for hero section (Avatar swap)
+            const heroSection = document.getElementById('hero');
+            const avatar = document.getElementById('avatar');
+            heroSection.addEventListener('mouseenter', () => {
+                avatar.src = 'img/avatar-hi.png';
+            });
+            heroSection.addEventListener('mouseleave', () => {
+                avatar.src = 'img/avatar-default.png';
+            });
+
+            // Bottom scroll gradient visibility logic
+            const bottomGradient = document.getElementById('bottomGradient');
+
+            window.addEventListener('scroll', () => {
+                const scrollPos = window.scrollY;
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.body.offsetHeight;
+
+                const distanceToBottom = documentHeight - (scrollPos + windowHeight);
+
+                // Show if scrolled down a bit, hide if near bottom
+                if (scrollPos > windowHeight * 0.1 && distanceToBottom > documentHeight * 0.05) {
+                    bottomGradient.style.opacity = '1';
+                } else {
+                    bottomGradient.style.opacity = '0';
+                }
+            });
+
+            // Pause carousel when tab is hidden
+            const carouselTrack = document.getElementById('carouselTrack');
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    carouselTrack.style.animationPlayState = 'paused';
+                } else {
+                    carouselTrack.style.animationPlayState = 'running';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
